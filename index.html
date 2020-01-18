@@ -11,7 +11,7 @@
         <div class="small-6 columns">
             <h1 class="text-center">YOU</h1>
             <div class="healthbar">
-                <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;">
+                <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" :style="{width: humanHp + '%'}">
                     {{ humanHp }}
                 </div>
             </div>
@@ -19,18 +19,18 @@
         <div class="small-6 columns">
             <h1 class="text-center">MONSTER</h1>
             <div class="healthbar">
-                <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;">
+                <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" :style="{width: monsterHp + '%'}">
                     {{ monsterHp }}
                 </div>
             </div>
         </div>
     </section>
-    <section class="row controls">
+    <section class="row controls" v-if="finished">
         <div class="small-12 columns">
             <button @click="reset" id="start-game">START NEW GAME</button>
         </div>
     </section>
-    <section class="row controls">
+    <section class="row controls" v-else>
         <div class="small-12 columns">
             <button @click="action('attack')" id="attack">ATTACK</button>
             <button @click="action('special-attack')" id="special-attack">SPECIAL ATTACK</button>
@@ -38,11 +38,11 @@
             <button @click="action('give-up')" id="give-up">GIVE UP</button>
         </div>
     </section>
-    <section class="row log">
+    <section class="row log" v-if="messages.length > 0">
         <div class="small-12 columns">
             <ul>
-                <li v-for="message in messages">
-                    {{ message }}
+                <li v-for="log in messages" :class="{'player-turn': log[1], 'monster-turn': !log[1]}">
+                    {{ log[0] }}
                 </li>
             </ul>
         </div>

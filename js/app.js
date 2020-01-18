@@ -84,11 +84,13 @@ new Vue({
                     // Assign 'human' as winner if humanHp is greater than monsterHp
                     if (this.humanHp > this.monsterHp) {
                         this.winner = 'human'
+                        alert("You won!")
                     }
 
                     // Assign 'monster' as winner if monsterHp is greater than humanHp
                     else if (this.monsterHp > this.humanHp) {
                         this.winner = 'monster'
+                        alert("Better luck next time :)")
                     }
 
                     // Assign 'tie' as this.winner if the HP is equal
@@ -163,8 +165,13 @@ new Vue({
         logger: function(task, person, damage = null) {
 
             // Set the person name to "You" if the person = "human"
-            person == "human" ? person = "You" : ''
-
+            if (person == "human") {
+                person = "You"
+                isPlayer = true
+            }
+            else {
+                isPlayer = false
+            }
             // Capitalize the first letter of 'person'
             message = person.toUpperCase() + " "
 
@@ -186,9 +193,11 @@ new Vue({
             else if (task === "surrender") {
                 message += "gave up! :("
             }
+            
+            log = [message, isPlayer]
 
             // Add the message to 'messages' array
-            this.messages.push(message)
+            this.messages.push(log)
 
             // Return the message
             return message
