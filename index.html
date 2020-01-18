@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Monster Slayer</title>
+    <link rel="stylesheet" href="css/foundation.min.css">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div id="app">
+    <section class="row">
+        <div class="small-6 columns">
+            <h1 class="text-center">YOU</h1>
+            <div class="healthbar">
+                <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;">
+                    {{ humanHp }}
+                </div>
+            </div>
+        </div>
+        <div class="small-6 columns">
+            <h1 class="text-center">MONSTER</h1>
+            <div class="healthbar">
+                <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;">
+                    {{ monsterHp }}
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="row controls">
+        <div class="small-12 columns">
+            <button @click="reset" id="start-game">START NEW GAME</button>
+        </div>
+    </section>
+    <section class="row controls">
+        <div class="small-12 columns">
+            <button @click="action('attack')" id="attack">ATTACK</button>
+            <button @click="action('special-attack')" id="special-attack">SPECIAL ATTACK</button>
+            <button @click="action('heal')" id="heal">HEAL</button>
+            <button @click="action('give-up')" id="give-up">GIVE UP</button>
+        </div>
+    </section>
+    <section class="row log">
+        <div class="small-12 columns">
+            <ul>
+                <li v-for="message in messages">
+                    {{ message }}
+                </li>
+            </ul>
+        </div>
+    </section>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
